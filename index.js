@@ -9,6 +9,10 @@ const sqlite3 = require('sqlite3')
 
 const db = new sqlite3.Database('./userinfo.db')
 
+db.serialize(() => {           
+    db.run("CREATE TABLE user (id INT, username TEXT, password TEXT)");
+  });
+
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
