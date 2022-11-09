@@ -4,15 +4,18 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, { cors: { orgin: '*'}})
 const bodyParser = require('body-parser')
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser")
+const sqlite3 = require('sqlite3')
+
+const db = new sqlite3.Database('./userinfo.db')
 
 app.set('view engine', 'ejs')
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(cookieParser());
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.render('index')
